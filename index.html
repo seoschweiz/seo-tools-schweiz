@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Free SEO Meta Tag Generator | SeoSchweiz.net</title>
+
+  <meta name="description" content="Kostenloser SEO Meta Tag Generator. Erstelle Title, Meta Description, Canonical URL und Open Graph Tags für deine Webseite.">
+
+  <meta name="robots" content="index, follow">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 40px 20px;
+      color: #222;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      color: #c40000;
+    }
+
+    input, textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin-top: 6px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      background: #c40000;
+      color: white;
+      border: none;
+      padding: 13px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #990000;
+    }
+
+    #result {
+      margin-top: 25px;
+      background: #111;
+      color: #eee;
+      padding: 20px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: monospace;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .footer a {
+      color: #c40000;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Free SEO Meta Tag Generator</h1>
+
+  <p>
+    Erstelle kostenlos wichtige SEO Meta Tags für deine Webseite.
+  </p>
+
+  <label><strong>Seitentitel</strong></label>
+  <input id="title" placeholder="SEO Agentur Schweiz">
+
+  <label><strong>Meta Description</strong></label>
+  <textarea id="description" rows="4" placeholder="Beschreibung deiner Webseite..."></textarea>
+
+  <label><strong>URL</strong></label>
+  <input id="url" placeholder="https://www.example.com">
+
+  <button onclick="generateTags()">SEO Tags erstellen</button>
+
+  <div id="result">
+Deine SEO Meta Tags erscheinen hier.
+  </div>
+
+  <div class="footer">
+    Free SEO Tool by
+    <a href="https://www.seoschweiz.net/" target="_blank">
+      SeoSchweiz.net
+    </a>
+  </div>
+
+</div>
+
+<script>
+
+function escapeHTML(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function generateTags() {
+
+  const title = escapeHTML(document.getElementById("title").value);
+  const description = escapeHTML(document.getElementById("description").value);
+  const url = escapeHTML(document.getElementById("url").value);
+
+  const tags =
+`<title>${title}</title>
+
+<meta name="description" content="${description}">
+
+<link rel="canonical" href="${url}">
+
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="${title}">
+
+<meta property="og:description" content="${description}">
+
+<meta property="og:url" content="${url}">
+
+<meta property="og:type" content="website">`;
+
+  document.getElementById("result").textContent = tags;
+}
+
+</script>
+
+</body>
+</html>
