@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RSS Feed Detector | RSS & Atom Feed finden | SEO Schweiz</title>
+
+  <meta name="description"
+        content="Kostenloser RSS Feed Detector von SEO Schweiz. Website URL eingeben und RSS, Atom und XML Feed URLs automatisch finden.">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical"
+        href="https://tools.seoschweiz.net/rss-feed-detector/">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      background: #fff;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    }
+
+    h1,
+    h2 {
+      color: #c40000;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .intro {
+      line-height: 1.65;
+      color: #555;
+    }
+
+    label {
+      display: block;
+      margin-top: 25px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 18px;
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 6px;
+      background: #c40000;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #990000;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    #status {
+      margin-top: 25px;
+    }
+
+    .message {
+      padding: 16px;
+      border-radius: 8px;
+      background: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    .success {
+      background: #eef8ef;
+      border-left: 4px solid #27823b;
+    }
+
+    .warning {
+      background: #fff8e6;
+      border-left: 4px solid #d99a00;
+    }
+
+    .error {
+      background: #fff0f0;
+      border-left: 4px solid #c40000;
+    }
+
+    #results {
+      margin-top: 25px;
+    }
+
+    .feed {
+      margin-top: 15px;
+      padding: 18px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .feed-type {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 4px 8px;
+      background: #222;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .feed-url {
+      margin: 8px 0 14px;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    .button-link {
+      display: inline-block;
+      margin: 5px 6px 5px 0;
+      padding: 10px 14px;
+      background: #c40000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .button-link.secondary {
+      background: #333;
+    }
+
+    .tools {
+      margin-top: 40px;
+      padding-top: 25px;
+      border-top: 1px solid #ddd;
+    }
+
+    .tools a {
+      color: #c40000;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 35px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #c40000;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .container {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="container">
+
+  <h1>RSS Feed Detector</h1>
+
+  <p class="intro">
+    Gib die Adresse einer Website ein. Der RSS Feed Detector sucht
+    nach eingebundenen RSS- und Atom-Feeds und prüft zusätzlich
+    typische Feed-Adressen.
+  </p>
+
+  <label for="website">
+    Website URL
+  </label>
+
+  <input
+    id="website"
+    type="url"
+    placeholder="https://www.example.com">
+
+  <button id="detectButton">
+    RSS Feed suchen
+  </button>
+
+  <div id="status"></div>
+
+  <section id="results"></section>
+
+
+  <section class="tools">
+
+    <h2>RSS Feed gefunden?</h2>
+
+    <p>
+      Mit unserem
+      <a href="/rss-widget-generator/">
+        SEO Friendly RSS Widget Generator
+      </a>
+      kannst du den gefundenen Feed anschließend automatisch
+      auf einer Website oder einem Blog anzeigen.
+    </p>
+
+  </section>
+
+
+  <div class="footer">
+    Free SEO Tool by
+    <a
+      href="https://www.seoschweiz.net/"
+      target="_blank"
+      rel="noopener">
+      SEO Schweiz
+    </a>
+  </div>
+
+</main>
+
+
+<script>
+(function () {
+
+  "use strict";
+
+  const input =
+    document.getElementById("website");
+
+  const button =
+    document.getElementById("detectButton");
+
+  const status =
+    document.getElementById("status");
+
+  const results =
+    document.getElementById("results");
+
+
+  button.addEventListener(
+    "click",
+    detectFeeds
+  );
+
+
+  input.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (event.key === "Enter") {
+        detectFeeds();
+      }
+
+    }
+  );
+
+
+  function normalizeWebsite(value) {
+
+    value = value.trim();
+
+    if (
+      !value.startsWith("http://") &&
+      !value.startsWith("https://")
+    ) {
+      value = "https://" + value;
+    }
+
+    return new URL(value);
+
+  }
+
+
+  function proxyUrl(url) {
+
+    return (
+      "https://api.allorigins.win/raw?url=" +
+      encodeURIComponent(url)
+    );
+
+  }
+
+
+  async function fetchText(url) {
+
+    /*
+     * Zuerst direkter Abruf.
+     * Falls CORS blockiert: Proxy-Fallback.
+     */
+
+    try {
+
+      const response =
+        await fetch(
+          url,
+          {
+            cache: "no-store"
+          }
+        );
+
+      if (response.ok) {
+        return await response.text();
+      }
+
+    } catch (error) {
+      // Proxy-Fallback folgt.
+    }
+
+
+    const proxyResponse =
+      await fetch(
+        proxyUrl(url),
+        {
+          cache: "no-store"
+        }
+      );
+
+
+    if (!proxyResponse.ok) {
+      throw new Error("Website konnte nicht geladen werden.");
+    }
+
+
+    return await proxyResponse.text();
+
+  }
+
+
+  async function urlExists(url) {
+
+    try {
+
+      const text =
+        await fetchText(url);
+
+      const start =
+        text
+          .trim()
+          .slice(0, 1000)
+          .toLowerCase();
+
+
+      return (
+        start.includes("<rss") ||
+        start.includes("<feed") ||
+        start.includes("rdf:rdf")
+      );
+
+    } catch {
+
+      return false;
+
+    }
+
+  }
+
+
+  function detectFeedType(url, type) {
+
+    const value =
+      (type + " " + url).toLowerCase();
+
+    if (value.includes("atom")) {
+      return "ATOM";
+    }
+
+    if (value.includes("rss")) {
+      return "RSS";
+    }
+
+    if (value.includes("feed")) {
+      return "RSS / ATOM";
+    }
+
+    return "XML FEED";
+
+  }
+
+
+  function discoverFromHtml(html, baseUrl) {
+
+    const found = [];
+
+    const parser =
+      new DOMParser();
+
+    const doc =
+      parser.parseFromString(
+        html,
+        "text/html"
+      );
+
+
+    const links =
+      doc.querySelectorAll(
+        'link[rel~="alternate"]'
+      );
+
+
+    links.forEach(
+      function (link) {
+
+        const type =
+          (
+            link.getAttribute("type") ||
+            ""
+          ).toLowerCase();
+
+        const href =
+          link.getAttribute("href");
+
+
+        if (!href) {
+          return;
+        }
+
+
+        if (
+          type.includes("rss") ||
+          type.includes("atom") ||
+          type.includes("xml")
+        ) {
+
+          try {
+
+            const absolute =
+              new URL(
+                href,
+                baseUrl
+              ).href;
+
+
+            found.push({
+              url: absolute,
+              type: detectFeedType(
+                absolute,
+                type
+              )
+            });
+
+          } catch {
+            // Ungültigen Link ignorieren.
+          }
+
+        }
+
+      }
+    );
+
+
+    return found;
+
+  }
+
+
+  async function detectFeeds() {
+
+    status.innerHTML = "";
+    results.innerHTML = "";
+
+
+    let website;
+
+    try {
+
+      website =
+        normalizeWebsite(
+          input.value
+        );
+
+    } catch {
+
+      showStatus(
+        "Bitte eine gültige Website URL eingeben.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    button.disabled = true;
+    button.textContent = "Suche läuft...";
+
+
+    showStatus(
+      "Website wird untersucht und mögliche RSS Feeds werden geprüft...",
+      ""
+    );
+
+
+    const found =
+      new Map();
+
+
+    /*
+     * 1. HTML der Website untersuchen
+     */
+
+    try {
+
+      const html =
+        await fetchText(
+          website.href
+        );
+
+
+      const discovered =
+        discoverFromHtml(
+          html,
+          website.href
+        );
+
+
+      discovered.forEach(
+        function (feed) {
+
+          found.set(
+            feed.url,
+            feed
+          );
+
+        }
+      );
+
+    } catch (error) {
+
+      console.log(
+        "HTML konnte nicht untersucht werden:",
+        error
+      );
+
+    }
+
+
+    /*
+     * 2. Typische RSS-Pfade testen
+     */
+
+    const origin =
+      website.origin;
+
+
+    const pathname =
+      website.pathname.replace(
+        /\/+$/,
+        ""
+      );
+
+
+    const candidates = [
+      origin + "/feed",
+      origin + "/feed/",
+      origin + "/feed.xml",
+      origin + "/rss",
+      origin + "/rss/",
+      origin + "/rss.xml",
+      origin + "/atom.xml",
+      origin + "/index.xml"
+    ];
+
+
+    /*
+     * Bei Unterseiten zusätzlich Feed-Pfade
+     * relativ zur eingegebenen Seite testen.
+     */
+
+    if (
+      pathname &&
+      pathname !== "/"
+    ) {
+
+      candidates.push(
+        origin + pathname + "/feed"
+      );
+
+      candidates.push(
+        origin + pathname + "/feed/"
+      );
+
+      candidates.push(
+        origin + pathname + "/feed.xml"
+      );
+
+      candidates.push(
+        origin + pathname + "/rss.xml"
+      );
+
+    }
+
+
+    const uniqueCandidates =
+      [...new Set(candidates)];
+
+
+    /*
+     * Nicht hunderte Requests erzeugen.
+     * Kandidaten parallel prüfen.
+     */
+
+    const checks =
+      uniqueCandidates.map(
+        async function (candidate) {
+
+          if (found.has(candidate)) {
+            return;
+          }
+
+
+          const exists =
+            await urlExists(
+              candidate
+            );
+
+
+          if (exists) {
+
+            found.set(
+              candidate,
+              {
+                url: candidate,
+                type: detectFeedType(
+                  candidate,
+                  ""
+                )
+              }
+            );
+
+          }
+
+        }
+      );
+
+
+    await Promise.allSettled(
+      checks
+    );
+
+
+    button.disabled = false;
+    button.textContent =
+      "RSS Feed suchen";
+
+
+    /*
+     * Ergebnisse
+     */
+
+    if (!found.size) {
+
+      showStatus(
+        "Kein RSS- oder Atom-Feed wurde automatisch gefunden. Die Website kann trotzdem einen Feed besitzen, der unter einer ungewöhnlichen Adresse liegt.",
+        "warning"
+      );
+
+      return;
+
+    }
+
+
+    showStatus(
+      found.size +
+      (
+        found.size === 1
+          ? " Feed gefunden."
+          : " Feeds gefunden."
+      ),
+      "success"
+    );
+
+
+    found.forEach(
+      function (feed) {
+
+        renderFeed(
+          feed
+        );
+
+      }
+    );
+
+  }
+
+
+  function renderFeed(feed) {
+
+    const box =
+      document.createElement("article");
+
+    box.className =
+      "feed";
+
+
+    const type =
+      document.createElement("div");
+
+    type.className =
+      "feed-type";
+
+    type.textContent =
+      feed.type;
+
+
+    const url =
+      document.createElement("div");
+
+    url.className =
+      "feed-url";
+
+    url.textContent =
+      feed.url;
+
+
+    const open =
+      document.createElement("a");
+
+    open.className =
+      "button-link secondary";
+
+    open.href =
+      feed.url;
+
+    open.target =
+      "_blank";
+
+    open.rel =
+      "noopener";
+
+    open.textContent =
+      "Feed öffnen";
+
+
+    const widget =
+      document.createElement("a");
+
+    widget.className =
+      "button-link";
+
+
+    widget.href =
+      "/rss-widget-generator/?feed=" +
+      encodeURIComponent(
+        feed.url
+      );
+
+
+    widget.textContent =
+      "RSS Widget erstellen";
+
+
+    box.appendChild(type);
+    box.appendChild(url);
+    box.appendChild(open);
+    box.appendChild(widget);
+
+    results.appendChild(box);
+
+  }
+
+
+  function showStatus(message, type) {
+
+    status.innerHTML = "";
+
+
+    const box =
+      document.createElement("div");
+
+    box.className =
+      "message" +
+      (
+        type
+          ? " " + type
+          : ""
+      );
+
+
+    box.textContent =
+      message;
+
+
+    status.appendChild(
+      box
+    );
+
+  }
+
+})();
+</script>
+
+</body>
+</html>
