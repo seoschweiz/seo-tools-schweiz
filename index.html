@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Free SEO Meta Tag Generator | SeoSchweiz.net</title>
+  <title>Free SEO Tools | Meta Tag Generator & RSS Widget | SeoSchweiz.net</title>
 
-  <meta name="description" content="Kostenloser SEO Meta Tag Generator. Erstelle Title, Meta Description, Canonical URL und Open Graph Tags für deine Webseite.">
+  <meta name="description"
+        content="Kostenlose SEO Tools von SeoSchweiz.net: SEO Meta Tag Generator und SEO Friendly RSS Widget Generator für Websites, Blogs und Blogger.">
 
   <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://tools.seoschweiz.net/">
 
   <style>
     body {
@@ -28,11 +31,13 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
-    h1 {
+    h1,
+    h2 {
       color: #c40000;
     }
 
-    input, textarea {
+    input,
+    textarea {
       width: 100%;
       box-sizing: border-box;
       padding: 12px;
@@ -68,14 +73,63 @@
       font-family: monospace;
     }
 
+    .tools {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid #ddd;
+    }
+
+    .tool-card {
+      margin-top: 20px;
+      padding: 22px;
+      background: #f7f7f7;
+      border-radius: 10px;
+    }
+
+    .tool-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .tool-card p {
+      line-height: 1.6;
+    }
+
+    .tool-button {
+      display: inline-block;
+      margin-top: 8px;
+      background: #c40000;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .tool-button:hover {
+      background: #990000;
+    }
+
     .footer {
-      margin-top: 30px;
+      margin-top: 35px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
       font-size: 14px;
       color: #666;
     }
 
     .footer a {
       color: #c40000;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .container {
+        padding: 24px;
+      }
     }
   </style>
 </head>
@@ -90,45 +144,108 @@
     Erstelle kostenlos wichtige SEO Meta Tags für deine Webseite.
   </p>
 
-  <label><strong>Seitentitel</strong></label>
+  <label for="title"><strong>Seitentitel</strong></label>
   <input id="title" placeholder="SEO Agentur Schweiz">
 
-  <label><strong>Meta Description</strong></label>
-  <textarea id="description" rows="4" placeholder="Beschreibung deiner Webseite..."></textarea>
+  <label for="description"><strong>Meta Description</strong></label>
+  <textarea
+    id="description"
+    rows="4"
+    placeholder="Beschreibung deiner Webseite..."></textarea>
 
-  <label><strong>URL</strong></label>
+  <label for="url"><strong>URL</strong></label>
   <input id="url" placeholder="https://www.example.com">
 
-  <button onclick="generateTags()">SEO Tags erstellen</button>
+  <button onclick="generateTags()">
+    SEO Tags erstellen
+  </button>
 
   <div id="result">
 Deine SEO Meta Tags erscheinen hier.
   </div>
 
+
+  <section class="tools">
+
+    <h2>Weitere kostenlose SEO Tools</h2>
+
+    <p>
+      Nutze weitere kostenlose Tools von SEO Schweiz für
+      Content, RSS Feeds und Suchmaschinenoptimierung.
+    </p>
+
+    <div class="tool-card">
+
+      <h3>SEO Friendly RSS Widget Generator</h3>
+
+      <p>
+        RSS Feeds automatisch auf Websites, Blogs und Blogger
+        anzeigen. Anzahl der Beiträge, Titel, Datum und Widget-Höhe
+        auswählen und einen fertigen Embed-Code erstellen.
+      </p>
+
+      <p>
+        Optional kann ein normaler HTML-Link vor dem Widget
+        eingebunden werden.
+      </p>
+
+      <a
+        class="tool-button"
+        href="/rss-widget-generator/">
+        RSS Widget Generator öffnen
+      </a>
+
+    </div>
+
+  </section>
+
+
   <div class="footer">
-    Free SEO Tool by
-    <a href="https://www.seoschweiz.net/" target="_blank">
+
+    Free SEO Tools by
+
+    <a
+      href="https://www.seoschweiz.net/"
+      target="_blank"
+      rel="noopener">
       SeoSchweiz.net
     </a>
+
   </div>
 
 </div>
 
+
 <script>
 
 function escapeHTML(str) {
+
   return str
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+
 }
+
 
 function generateTags() {
 
-  const title = escapeHTML(document.getElementById("title").value);
-  const description = escapeHTML(document.getElementById("description").value);
-  const url = escapeHTML(document.getElementById("url").value);
+  const title =
+    escapeHTML(
+      document.getElementById("title").value
+    );
+
+  const description =
+    escapeHTML(
+      document.getElementById("description").value
+    );
+
+  const url =
+    escapeHTML(
+      document.getElementById("url").value
+    );
+
 
   const tags =
 `<title>${title}</title>
@@ -147,7 +264,11 @@ function generateTags() {
 
 <meta property="og:type" content="website">`;
 
-  document.getElementById("result").textContent = tags;
+
+  document
+    .getElementById("result")
+    .textContent = tags;
+
 }
 
 </script>
