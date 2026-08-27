@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <meta name="robots"
+        content="noindex,follow">
+
+  <title>RSS News Widget | SEO Schweiz</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #111;
+      line-height: 1.5;
+    }
+
+    #rss-widget {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .rss-title {
+      margin: 0 0 14px;
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    .rss-item {
+      padding: 11px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .rss-item:last-child {
+      border-bottom: 0;
+    }
+
+    .rss-item a {
+      color: #111;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .rss-item a:hover {
+      text-decoration: underline;
+    }
+
+    .rss-date {
+      display: block;
+      margin-top: 4px;
+      color: #777;
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .rss-message {
+      padding: 12px;
+      border-radius: 6px;
+      background: #f5f5f5;
+      color: #555;
+      font-size: 14px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div id="rss-widget">
+
+  <div class="rss-message">
+    RSS Feed wird geladen...
+  </div>
+
+</div>
+
+
+<script>
+(function () {
+
+  "use strict";
+
+
+  const container =
+    document.getElementById("rss-widget");
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const feedUrl =
+    params.get("feed");
+
+
+  let count =
+    parseInt(
+      params.get("count") || "5",
+      10
+    );
+
+
+  if (isNaN(count)) {
+    count = 5;
+  }
+
+
+  count =
+    Math.max(
+      1,
+      Math.min(count, 15)
+    );
+
+
+  const showTitle =
+    params.get("title") !== "0";
+
+
+  const showDate =
+    params.get("date") !== "0";
+
+
+  const newTab =
+    params.get("newtab") !== "0";
+
+
+  if (!feedUrl) {
+
+    showMessage(
+      "Kein RSS Feed angegeben."
+    );
+
+    return;
+
+  }
+
+
+  try {
+
+    const testUrl =
+      new URL(feedUrl);
+
+
+    if (
+      testUrl.protocol !== "http:" &&
+      testUrl.protocol !== "https:"
+    ) {
+
+      throw new Error(
+        "Ungültiges Protokoll"
+      );
+
+    }
+
+  } catch {
+
+    showMessage(
+      "Ungültige RSS Feed URL."
+    );
+
+    return;
+
+  }
+
+
+  const apiUrl =
+    "https://api.rss2json.com/v1/api.json?rss_url=" +
+    encodeURIComponent(feedUrl);
+
+
+  fetch(
+    apiUrl,
+    {
+      method: "GET",
+      mode: "cors",
+      cache: "no-store"
+    }
+  )
+
+  .then(function (response) {
+
+    if (!response.ok) {
+
+      throw new Error(
+        "HTTP " + response.status
+      );
+
+    }
+
+
+    return response.json();
+
+  })
+
+
+  .then(function (data) {
+
+    if (!data) {
+
+      throw new Error(
+        "Keine RSS Daten empfangen."
+      );
+
+    }
+
+
+    if (
+      data.status &&
+      data.status !== "ok"
+    ) {
+
+      throw new Error(
+        data.message ||
+        "RSS Feed konnte nicht gelesen werden."
+      );
+
+    }
+
+
+    if (!Array.isArray(data.items)) {
+
+      throw new Error(
+        "Keine gültigen RSS Beiträge gefunden."
+      );
+
+    }
+
+
+    renderFeed(data);
+
+  })
+
+
+  .catch(function (error) {
+
+    console.error(
+      "RSS Widget Fehler:",
+      error
+    );
+
+
+    showMessage(
+      "RSS Feed konnte nicht geladen werden."
+    );
+
+  });
+
+
+  function renderFeed(data) {
+
+    container.innerHTML = "";
+
+
+    /*
+     * Feed Titel
+     */
+
+    if (
+      showTitle &&
+      data.feed &&
+      data.feed.title
+    ) {
+
+      const title =
+        document.createElement("div");
+
+
+      title.className =
+        "rss-title";
+
+
+      title.textContent =
+        data.feed.title;
+
+
+      container.appendChild(
+        title
+      );
+
+    }
+
+
+    const items =
+      data.items.slice(
+        0,
+        count
+      );
+
+
+    if (!items.length) {
+
+      showMessage(
+        "Keine Beiträge gefunden."
+      );
+
+      return;
+
+    }
+
+
+    /*
+     * Beiträge
+     */
+
+    items.forEach(
+      function (item) {
+
+
+        const article =
+          document.createElement(
+            "article"
+          );
+
+
+        article.className =
+          "rss-item";
+
+
+        const link =
+          document.createElement(
+            "a"
+          );
+
+
+        link.href =
+          item.link ||
+          feedUrl;
+
+
+        link.textContent =
+          item.title ||
+          "Artikel";
+
+
+        if (newTab) {
+
+          link.target =
+            "_blank";
+
+
+          link.rel =
+            "noopener noreferrer";
+
+        }
+
+
+        article.appendChild(
+          link
+        );
+
+
+        /*
+         * Datum
+         */
+
+        if (
+          showDate &&
+          item.pubDate
+        ) {
+
+          const parsedDate =
+            new Date(
+              item.pubDate
+            );
+
+
+          if (
+            !isNaN(
+              parsedDate.getTime()
+            )
+          ) {
+
+            const time =
+              document.createElement(
+                "time"
+              );
+
+
+            time.className =
+              "rss-date";
+
+
+            time.dateTime =
+              parsedDate.toISOString();
+
+
+            time.textContent =
+              parsedDate.toLocaleDateString(
+                "de-DE",
+                {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric"
+                }
+              );
+
+
+            article.appendChild(
+              time
+            );
+
+          }
+
+        }
+
+
+        container.appendChild(
+          article
+        );
+
+      }
+    );
+
+  }
+
+
+  function showMessage(message) {
+
+    container.innerHTML = "";
+
+
+    const box =
+      document.createElement(
+        "div"
+      );
+
+
+    box.className =
+      "rss-message";
+
+
+    box.textContent =
+      message;
+
+
+    container.appendChild(
+      box
+    );
+
+  }
+
+})();
+</script>
+
+</body>
+</html>
