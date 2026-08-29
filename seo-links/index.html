@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SEO Links Tool | SEO Schweiz</title>
+
+  <meta name="description" content="Kostenloses SEO Link Tool zum Sammeln, Bewerten und Verwalten von Backlinks, Blogverzeichnissen, Gastbeiträgen und SEO-Linkquellen.">
+  <meta name="robots" content="index,follow">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 0;
+      color: #d1d5db;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 15px;
+      background: white;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 11px 18px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background: #16a34a;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #15803d;
+    }
+
+    .btn-secondary {
+      background: #374151;
+      color: white;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .toolbar input,
+    .toolbar select {
+      max-width: 260px;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      background: #f3f4f6;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    th,
+    td {
+      padding: 12px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      background: #f9fafb;
+      font-size: 14px;
+    }
+
+    .seo-score {
+      display: inline-block;
+      min-width: 48px;
+      text-align: center;
+      padding: 6px 9px;
+      border-radius: 20px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .score-high {
+      background: #16a34a;
+    }
+
+    .score-medium {
+      background: #f59e0b;
+    }
+
+    .score-low {
+      background: #dc2626;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      background: #e5e7eb;
+    }
+
+    .badge-green {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-red {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .badge-blue {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .actions button,
+    .actions a {
+      padding: 7px 10px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .open-link {
+      background: #2563eb;
+      color: white;
+    }
+
+    .edit-link {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .delete-link {
+      background: #dc2626;
+      color: white;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 30px;
+      color: #6b7280;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #16a34a;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 700px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+
+      header h1 {
+        font-size: 24px;
+      }
+
+      .toolbar input,
+      .toolbar select {
+        max-width: none;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>SEO Links Tool</h1>
+  <p>Backlinks, Blogverzeichnisse und SEO-Linkquellen sammeln & bewerten</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Neue Linkquelle eintragen</h2>
+
+    <form id="linkForm">
+
+      <div class="form-grid">
+
+        <div>
+          <label for="name">Name der Webseite</label>
+          <input type="text" id="name" placeholder="z. B. TopBlogs" required>
+        </div>
+
+        <div>
+          <label for="url">URL</label>
+          <input type="url" id="url" placeholder="https://example.com" required>
+        </div>
+
+        <div>
+          <label for="score">SEO-Wert (1–100)</label>
+          <input type="number" id="score" min="1" max="100" value="50" required>
+        </div>
+
+        <div>
+          <label for="type">Typ</label>
+          <select id="type">
+            <option>Blogverzeichnis</option>
+            <option>Webverzeichnis</option>
+            <option>Backlink</option>
+            <option>Gastbeitrag</option>
+            <option>News</option>
+            <option>Social Media</option>
+            <option>Forum</option>
+            <option>Business Directory</option>
+            <option>Bookmark</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="follow">Linktyp</label>
+          <select id="follow">
+            <option value="DoFollow">DoFollow</option>
+            <option value="NoFollow">NoFollow</option>
+            <option value="Unbekannt">Unbekannt</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="cost">Kosten</label>
+          <select id="cost">
+            <option value="Kostenlos">Kostenlos</option>
+            <option value="Bezahlt">Bezahlt</option>
+            <option value="Freemium">Freemium</option>
+            <option value="Unbekannt">Unbekannt</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="country">Land</label>
+          <input type="text" id="country" placeholder="Deutschland, Schweiz, International...">
+        </div>
+
+        <div>
+          <label for="status">Status</label>
+          <select id="status">
+            <option value="Offen">Offen</option>
+            <option value="Eingetragen">Eingetragen</option>
+            <option value="Geprüft">Geprüft</option>
+            <option value="Abgelehnt">Abgelehnt</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="notes">Notiz</label>
+          <textarea id="notes" placeholder="z. B. Anmeldung kostenlos, Backlink erforderlich..."></textarea>
+        </div>
+
+      </div>
+
+      <br>
+
+      <button type="submit" class="btn-primary" id="saveButton">
+        Link speichern
+      </button>
+
+      <button type="button" class="btn-secondary" id="cancelEdit" style="display:none;">
+        Bearbeiten abbrechen
+      </button>
+
+    </form>
+  </div>
+
+  <div class="card">
+
+    <h2>Meine SEO-Linkquellen</h2>
+
+    <div class="stats">
+      <div class="stat">
+        Gesamt: <span id="totalLinks">0</span>
+      </div>
+
+      <div class="stat">
+        DoFollow: <span id="dofollowCount">0</span>
+      </div>
+
+      <div class="stat">
+        Kostenlos: <span id="freeCount">0</span>
+      </div>
+
+      <div class="stat">
+        Eingetragen: <span id="submittedCount">0</span>
+      </div>
+    </div>
+
+    <div class="toolbar">
+
+      <input
+        type="text"
+        id="search"
+        placeholder="Links durchsuchen..."
+      >
+
+      <select id="filterType">
+        <option value="">Alle Typen</option>
+        <option>Blogverzeichnis</option>
+        <option>Webverzeichnis</option>
+        <option>Backlink</option>
+        <option>Gastbeitrag</option>
+        <option>News</option>
+        <option>Social Media</option>
+        <option>Forum</option>
+        <option>Business Directory</option>
+        <option>Bookmark</option>
+        <option>Sonstiges</option>
+      </select>
+
+      <select id="filterCost">
+        <option value="">Alle Kosten</option>
+        <option value="Kostenlos">Kostenlos</option>
+        <option value="Bezahlt">Bezahlt</option>
+        <option value="Freemium">Freemium</option>
+      </select>
+
+      <select id="sort">
+        <option value="scoreDesc">SEO-Wert: hoch → niedrig</option>
+        <option value="scoreAsc">SEO-Wert: niedrig → hoch</option>
+        <option value="nameAsc">Name A → Z</option>
+        <option value="newest">Neueste zuerst</option>
+      </select>
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>SEO</th>
+            <th>Webseite</th>
+            <th>Typ</th>
+            <th>Follow</th>
+            <th>Kosten</th>
+            <th>Land</th>
+            <th>Status</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+
+        <tbody id="linkTable"></tbody>
+
+      </table>
+
+      <div id="emptyState" class="empty">
+        Noch keine Links gespeichert.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  SEO Links Tool ·
+  <a href="https://www.seoschweiz.net/" target="_blank" rel="noopener">
+    SEO Schweiz
+  </a>
+</footer>
+
+<script>
+
+  const STORAGE_KEY = "seoSchweizLinks";
+
+  let links = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+  let editId = null;
+
+  const form = document.getElementById("linkForm");
+  const table = document.getElementById("linkTable");
+  const emptyState = document.getElementById("emptyState");
+
+  const searchInput = document.getElementById("search");
+  const filterType = document.getElementById("filterType");
+  const filterCost = document.getElementById("filterCost");
+  const sortSelect = document.getElementById("sort");
+
+  const saveButton = document.getElementById("saveButton");
+  const cancelEdit = document.getElementById("cancelEdit");
+
+
+  function saveLinks() {
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(links)
+    );
+
+  }
+
+
+  function escapeHtml(text) {
+
+    if (!text) return "";
+
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  function getScoreClass(score) {
+
+    if (score >= 75) return "score-high";
+    if (score >= 45) return "score-medium";
+
+    return "score-low";
+
+  }
+
+
+  function updateStats() {
+
+    document.getElementById("totalLinks").textContent =
+      links.length;
+
+    document.getElementById("dofollowCount").textContent =
+      links.filter(link => link.follow === "DoFollow").length;
+
+    document.getElementById("freeCount").textContent =
+      links.filter(link => link.cost === "Kostenlos").length;
+
+    document.getElementById("submittedCount").textContent =
+      links.filter(link => link.status === "Eingetragen").length;
+
+  }
+
+
+  function renderLinks() {
+
+    let filtered = [...links];
+
+    const search = searchInput.value.toLowerCase().trim();
+
+    if (search) {
+
+      filtered = filtered.filter(link =>
+
+        link.name.toLowerCase().includes(search) ||
+        link.url.toLowerCase().includes(search) ||
+        link.type.toLowerCase().includes(search) ||
+        link.country.toLowerCase().includes(search) ||
+        link.notes.toLowerCase().includes(search)
+
+      );
+
+    }
+
+
+    if (filterType.value) {
+
+      filtered = filtered.filter(
+        link => link.type === filterType.value
+      );
+
+    }
+
+
+    if (filterCost.value) {
+
+      filtered = filtered.filter(
+        link => link.cost === filterCost.value
+      );
+
+    }
+
+
+    switch (sortSelect.value) {
+
+      case "scoreDesc":
+
+        filtered.sort(
+          (a, b) => b.score - a.score
+        );
+
+        break;
+
+
+      case "scoreAsc":
+
+        filtered.sort(
+          (a, b) => a.score - b.score
+        );
+
+        break;
+
+
+      case "nameAsc":
+
+        filtered.sort(
+          (a, b) => a.name.localeCompare(b.name)
+        );
+
+        break;
+
+
+      case "newest":
+
+        filtered.sort(
+          (a, b) => b.created - a.created
+        );
+
+        break;
+
+    }
+
+
+    table.innerHTML = "";
+
+
+    if (filtered.length === 0) {
+
+      emptyState.style.display = "block";
+
+    } else {
+
+      emptyState.style.display = "none";
+
+    }
+
+
+    filtered.forEach(link => {
+
+      const tr = document.createElement("tr");
+
+
+      let followBadge = "badge";
+
+      if (link.follow === "DoFollow") {
+        followBadge += " badge-green";
+      }
+
+      if (link.follow === "NoFollow") {
+        followBadge += " badge-red";
+      }
+
+
+      let costBadge = "badge";
+
+      if (link.cost === "Kostenlos") {
+        costBadge += " badge-green";
+      }
+
+      if (link.cost === "Bezahlt") {
+        costBadge += " badge-red";
+      }
+
+
+      tr.innerHTML = `
+
+        <td>
+          <span class="seo-score ${getScoreClass(link.score)}">
+            ${link.score}
+          </span>
+        </td>
+
+        <td>
+
+          <strong>
+            ${escapeHtml(link.name)}
+          </strong>
+
+          ${
+            link.notes
+              ? `<br><small>${escapeHtml(link.notes)}</small>`
+              : ""
+          }
+
+        </td>
+
+        <td>
+          ${escapeHtml(link.type)}
+        </td>
+
+        <td>
+          <span class="${followBadge}">
+            ${escapeHtml(link.follow)}
+          </span>
+        </td>
+
+        <td>
+          <span class="${costBadge}">
+            ${escapeHtml(link.cost)}
+          </span>
+        </td>
+
+        <td>
+          ${escapeHtml(link.country || "-")}
+        </td>
+
+        <td>
+          <span class="badge badge-blue">
+            ${escapeHtml(link.status)}
+          </span>
+        </td>
+
+        <td>
+
+          <div class="actions">
+
+            <a
+              href="${escapeHtml(link.url)}"
+              target="_blank"
+              rel="noopener"
+              class="open-link"
+            >
+              Öffnen
+            </a>
+
+            <button
+              class="edit-link"
+              onclick="editLink('${link.id}')"
+            >
+              Bearbeiten
+            </button>
+
+            <button
+              class="delete-link"
+              onclick="deleteLink('${link.id}')"
+            >
+              Löschen
+            </button>
+
+          </div>
+
+        </td>
+
+      `;
+
+
+      table.appendChild(tr);
+
+    });
+
+
+    updateStats();
+
+  }
+
+
+  form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    const linkData = {
+
+      id:
+        editId ||
+        Date.now().toString(),
+
+      name:
+        document.getElementById("name").value.trim(),
+
+      url:
+        document.getElementById("url").value.trim(),
+
+      score:
+        Number(document.getElementById("score").value),
+
+      type:
+        document.getElementById("type").value,
+
+      follow:
+        document.getElementById("follow").value,
+
+      cost:
+        document.getElementById("cost").value,
+
+      country:
+        document.getElementById("country").value.trim(),
+
+      status:
+        document.getElementById("status").value,
+
+      notes:
+        document.getElementById("notes").value.trim(),
+
+      created:
+        editId
+          ? links.find(link => link.id === editId).created
+          : Date.now()
+
+    };
+
+
+    if (editId) {
+
+      const index =
+        links.findIndex(link => link.id === editId);
+
+      links[index] = linkData;
+
+    } else {
+
+      links.push(linkData);
+
+    }
+
+
+    saveLinks();
+
+    resetForm();
+
+    renderLinks();
+
+  });
+
+
+  function editLink(id) {
+
+    const link =
+      links.find(link => link.id === id);
+
+
+    if (!link) return;
+
+
+    editId = id;
+
+
+    document.getElementById("name").value =
+      link.name;
+
+    document.getElementById("url").value =
+      link.url;
+
+    document.getElementById("score").value =
+      link.score;
+
+    document.getElementById("type").value =
+      link.type;
+
+    document.getElementById("follow").value =
+      link.follow;
+
+    document.getElementById("cost").value =
+      link.cost;
+
+    document.getElementById("country").value =
+      link.country;
+
+    document.getElementById("status").value =
+      link.status;
+
+    document.getElementById("notes").value =
+      link.notes;
+
+
+    saveButton.textContent =
+      "Änderungen speichern";
+
+    cancelEdit.style.display =
+      "inline-block";
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  function deleteLink(id) {
+
+    const link =
+      links.find(link => link.id === id);
+
+
+    if (!link) return;
+
+
+    const confirmed =
+      confirm(
+        `Link "${link.name}" wirklich löschen?`
+      );
+
+
+    if (!confirmed) return;
+
+
+    links =
+      links.filter(link => link.id !== id);
+
+
+    saveLinks();
+
+    renderLinks();
+
+  }
+
+
+  function resetForm() {
+
+    editId = null;
+
+    form.reset();
+
+    document.getElementById("score").value =
+      50;
+
+    saveButton.textContent =
+      "Link speichern";
+
+    cancelEdit.style.display =
+      "none";
+
+  }
+
+
+  cancelEdit.addEventListener(
+    "click",
+    resetForm
+  );
+
+
+  searchInput.addEventListener(
+    "input",
+    renderLinks
+  );
+
+
+  filterType.addEventListener(
+    "change",
+    renderLinks
+  );
+
+
+  filterCost.addEventListener(
+    "change",
+    renderLinks
+  );
+
+
+  sortSelect.addEventListener(
+    "change",
+    renderLinks
+  );
+
+
+  renderLinks();
+
+</script>
+
+</body>
+</html>
