@@ -4,56 +4,111 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SEO Links Tool | SEO Schweiz</title>
+  <title>SEO Links & Online Resources | SEO Schweiz</title>
 
-  <meta name="description" content="Kostenloses SEO Link Tool zum Sammeln, Bewerten und Verwalten von Backlinks, Blogverzeichnissen, Gastbeiträgen und SEO-Linkquellen.">
+  <meta name="description" content="Ausgewählte Websites, SEO News, Social Media Kanäle, Kunstprojekte und Online-Ressourcen von SEO Schweiz.">
+
   <meta name="robots" content="index,follow">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: #f4f6f8;
       color: #1f2937;
+      line-height: 1.6;
     }
 
     header {
       background: #111827;
       color: white;
-      padding: 24px 20px;
+      padding: 45px 20px;
       text-align: center;
     }
 
     header h1 {
-      margin: 0 0 8px;
-      font-size: 30px;
+      margin: 0 0 10px;
+      font-size: 34px;
     }
 
     header p {
-      margin: 0;
+      margin: 0 auto;
       color: #d1d5db;
+      max-width: 750px;
     }
 
     .container {
-      max-width: 1200px;
-      margin: 30px auto;
+      max-width: 1150px;
+      margin: 35px auto;
       padding: 0 16px;
     }
 
-    .card {
+    .intro {
       background: white;
       border-radius: 14px;
-      padding: 22px;
-      margin-bottom: 24px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+      padding: 25px;
+      margin-bottom: 35px;
     }
 
-    h2 {
+    .section-title {
+      margin-top: 45px;
+      margin-bottom: 20px;
+      font-size: 27px;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .resource {
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .resource h3 {
       margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 21px;
+    }
+
+    .resource p {
+      color: #4b5563;
+    }
+
+    .resource a {
+      display: inline-block;
+      margin-top: 8px;
+      color: #15803d;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .resource a:hover {
+      text-decoration: underline;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 4px 9px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+
+    .manager {
+      margin-top: 55px;
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
     }
 
     .form-grid {
@@ -69,199 +124,70 @@
     label {
       display: block;
       font-weight: bold;
-      margin-bottom: 6px;
-      font-size: 14px;
+      margin-bottom: 5px;
     }
 
     input,
     select,
     textarea {
       width: 100%;
-      padding: 11px 12px;
+      padding: 11px;
       border: 1px solid #d1d5db;
       border-radius: 8px;
       font-size: 15px;
-      background: white;
     }
 
     textarea {
-      min-height: 90px;
-      resize: vertical;
+      min-height: 80px;
     }
 
     button {
-      border: none;
-      border-radius: 8px;
+      background: #16a34a;
+      color: white;
+      border: 0;
       padding: 11px 18px;
+      border-radius: 8px;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 15px;
+      margin-top: 15px;
+    }
+
+    .saved-links {
+      margin-top: 25px;
+    }
+
+    .saved-item {
+      border-top: 1px solid #e5e7eb;
+      padding: 15px 0;
+    }
+
+    .saved-item a {
+      color: #2563eb;
       font-weight: bold;
     }
 
-    .btn-primary {
-      background: #16a34a;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #15803d;
-    }
-
-    .btn-secondary {
-      background: #374151;
-      color: white;
-    }
-
-    .btn-danger {
+    .delete {
       background: #dc2626;
-      color: white;
-    }
-
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .toolbar input,
-    .toolbar select {
-      max-width: 260px;
-    }
-
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .stat {
-      background: #f3f4f6;
-      padding: 12px 16px;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 900px;
-    }
-
-    th,
-    td {
-      padding: 12px 10px;
-      border-bottom: 1px solid #e5e7eb;
-      text-align: left;
-      vertical-align: middle;
-    }
-
-    th {
-      background: #f9fafb;
-      font-size: 14px;
-    }
-
-    .seo-score {
-      display: inline-block;
-      min-width: 48px;
-      text-align: center;
-      padding: 6px 9px;
-      border-radius: 20px;
-      font-weight: bold;
-      color: white;
-    }
-
-    .score-high {
-      background: #16a34a;
-    }
-
-    .score-medium {
-      background: #f59e0b;
-    }
-
-    .score-low {
-      background: #dc2626;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 5px 8px;
-      border-radius: 20px;
+      margin-left: 10px;
+      padding: 6px 10px;
       font-size: 12px;
-      font-weight: bold;
-      background: #e5e7eb;
-    }
-
-    .badge-green {
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .badge-red {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .badge-blue {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .actions button,
-    .actions a {
-      padding: 7px 10px;
-      border-radius: 7px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .open-link {
-      background: #2563eb;
-      color: white;
-    }
-
-    .edit-link {
-      background: #f59e0b;
-      color: white;
-    }
-
-    .delete-link {
-      background: #dc2626;
-      color: white;
-    }
-
-    .empty {
-      text-align: center;
-      padding: 30px;
-      color: #6b7280;
     }
 
     footer {
+      margin-top: 50px;
+      padding: 35px 20px;
       text-align: center;
-      padding: 30px 20px;
       color: #6b7280;
-      font-size: 14px;
     }
 
     footer a {
-      color: #16a34a;
-      text-decoration: none;
+      color: #15803d;
       font-weight: bold;
+      text-decoration: none;
     }
 
-    @media (max-width: 700px) {
+    @media(max-width:750px) {
+      .resource-grid,
       .form-grid {
         grid-template-columns: 1fr;
       }
@@ -271,13 +197,7 @@
       }
 
       header h1 {
-        font-size: 24px;
-      }
-
-      .toolbar input,
-      .toolbar select {
-        max-width: none;
-        width: 100%;
+        font-size: 28px;
       }
     }
   </style>
@@ -286,688 +206,666 @@
 <body>
 
 <header>
-  <h1>SEO Links Tool</h1>
-  <p>Backlinks, Blogverzeichnisse und SEO-Linkquellen sammeln & bewerten</p>
+
+  <h1>SEO Links & Online Resources</h1>
+
+  <p>
+    Eine kuratierte Auswahl interessanter Websites, digitaler Projekte,
+    Social-Media-Kanäle, SEO-News und kreativer Online-Ressourcen.
+  </p>
+
 </header>
 
-<div class="container">
 
-  <div class="card">
-    <h2>Neue Linkquelle eintragen</h2>
+<main class="container">
 
-    <form id="linkForm">
+<section class="intro">
 
-      <div class="form-grid">
+  <h2>Selected Online Projects & Resources</h2>
 
-        <div>
-          <label for="name">Name der Webseite</label>
-          <input type="text" id="name" placeholder="z. B. TopBlogs" required>
-        </div>
+  <p>
+    Diese Seite verbindet ausgewählte digitale Projekte aus den Bereichen
+    Suchmaschinenoptimierung, Online Marketing, Branding, Kunst,
+    Street Art und digitale Medien. Zusätzlich finden sich internationale
+    SEO-News und Social-Media-Ressourcen.
+  </p>
 
-        <div>
-          <label for="url">URL</label>
-          <input type="url" id="url" placeholder="https://example.com" required>
-        </div>
+</section>
 
-        <div>
-          <label for="score">SEO-Wert (1–100)</label>
-          <input type="number" id="score" min="1" max="100" value="50" required>
-        </div>
 
-        <div>
-          <label for="type">Typ</label>
-          <select id="type">
-            <option>Blogverzeichnis</option>
-            <option>Webverzeichnis</option>
-            <option>Backlink</option>
-            <option>Gastbeitrag</option>
-            <option>News</option>
-            <option>Social Media</option>
-            <option>Forum</option>
-            <option>Business Directory</option>
-            <option>Bookmark</option>
-            <option>Sonstiges</option>
-          </select>
-        </div>
+<h2 class="section-title">Websites & Creative Projects</h2>
 
-        <div>
-          <label for="follow">Linktyp</label>
-          <select id="follow">
-            <option value="DoFollow">DoFollow</option>
-            <option value="NoFollow">NoFollow</option>
-            <option value="Unbekannt">Unbekannt</option>
-          </select>
-        </div>
+<div class="resource-grid">
 
-        <div>
-          <label for="cost">Kosten</label>
-          <select id="cost">
-            <option value="Kostenlos">Kostenlos</option>
-            <option value="Bezahlt">Bezahlt</option>
-            <option value="Freemium">Freemium</option>
-            <option value="Unbekannt">Unbekannt</option>
-          </select>
-        </div>
 
-        <div>
-          <label for="country">Land</label>
-          <input type="text" id="country" placeholder="Deutschland, Schweiz, International...">
-        </div>
+<article class="resource">
 
-        <div>
-          <label for="status">Status</label>
-          <select id="status">
-            <option value="Offen">Offen</option>
-            <option value="Eingetragen">Eingetragen</option>
-            <option value="Geprüft">Geprüft</option>
-            <option value="Abgelehnt">Abgelehnt</option>
-          </select>
-        </div>
+<span class="tag">Art & Barcelona</span>
 
-        <div class="full">
-          <label for="notes">Notiz</label>
-          <textarea id="notes" placeholder="z. B. Anmeldung kostenlos, Backlink erforderlich..."></textarea>
-        </div>
+<h3>Art Galleries Barcelona</h3>
 
-      </div>
+<p>
+Art Galleries Barcelona ist eine Online-Adresse rund um Kunst,
+Galerien und die kreative Szene Barcelonas. Die Domain verbindet
+das internationale Interesse an Barcelona mit den Themen Kunst,
+Ausstellungen und kulturelle Entdeckungen.
+</p>
 
-      <br>
+<a href="https://www.artgalleriesbarcelona.com/" target="_blank">
+Visit Art Galleries Barcelona →
+</a>
 
-      <button type="submit" class="btn-primary" id="saveButton">
-        Link speichern
-      </button>
+</article>
 
-      <button type="button" class="btn-secondary" id="cancelEdit" style="display:none;">
-        Bearbeiten abbrechen
-      </button>
 
-    </form>
-  </div>
+<article class="resource">
 
-  <div class="card">
+<span class="tag">Street Art</span>
 
-    <h2>Meine SEO-Linkquellen</h2>
+<h3>Barcelona Street Art</h3>
 
-    <div class="stats">
-      <div class="stat">
-        Gesamt: <span id="totalLinks">0</span>
-      </div>
+<p>
+Barcelona Street Art steht thematisch für urbane Kunst,
+Graffiti und die kreative Street-Art-Kultur der katalanischen
+Metropole. Barcelona gehört international zu den Städten,
+die besonders stark mit Urban Art und kreativer Straßenkultur
+verbunden werden.
+</p>
 
-      <div class="stat">
-        DoFollow: <span id="dofollowCount">0</span>
-      </div>
+<a href="https://www.barcelonastreetart.com/" target="_blank">
+Discover Barcelona Street Art →
+</a>
 
-      <div class="stat">
-        Kostenlos: <span id="freeCount">0</span>
-      </div>
+</article>
 
-      <div class="stat">
-        Eingetragen: <span id="submittedCount">0</span>
-      </div>
-    </div>
 
-    <div class="toolbar">
+<article class="resource">
 
-      <input
-        type="text"
-        id="search"
-        placeholder="Links durchsuchen..."
-      >
+<span class="tag">Branding</span>
 
-      <select id="filterType">
-        <option value="">Alle Typen</option>
-        <option>Blogverzeichnis</option>
-        <option>Webverzeichnis</option>
-        <option>Backlink</option>
-        <option>Gastbeitrag</option>
-        <option>News</option>
-        <option>Social Media</option>
-        <option>Forum</option>
-        <option>Business Directory</option>
-        <option>Bookmark</option>
-        <option>Sonstiges</option>
-      </select>
+<h3>Branding Switzerland</h3>
 
-      <select id="filterCost">
-        <option value="">Alle Kosten</option>
-        <option value="Kostenlos">Kostenlos</option>
-        <option value="Bezahlt">Bezahlt</option>
-        <option value="Freemium">Freemium</option>
-      </select>
+<p>
+Branding Switzerland verbindet die Themen Markenentwicklung,
+Corporate Identity, digitales Branding und die Positionierung
+von Unternehmen und Projekten mit einem klaren Bezug zum
+Schweizer Markt.
+</p>
 
-      <select id="sort">
-        <option value="scoreDesc">SEO-Wert: hoch → niedrig</option>
-        <option value="scoreAsc">SEO-Wert: niedrig → hoch</option>
-        <option value="nameAsc">Name A → Z</option>
-        <option value="newest">Neueste zuerst</option>
-      </select>
+<a href="https://www.brandingswitzerland.com/" target="_blank">
+Visit Branding Switzerland →
+</a>
 
-    </div>
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-          <tr>
-            <th>SEO</th>
-            <th>Webseite</th>
-            <th>Typ</th>
-            <th>Follow</th>
-            <th>Kosten</th>
-            <th>Land</th>
-            <th>Status</th>
-            <th>Aktionen</th>
-          </tr>
-        </thead>
-
-        <tbody id="linkTable"></tbody>
-
-      </table>
-
-      <div id="emptyState" class="empty">
-        Noch keine Links gespeichert.
-      </div>
-
-    </div>
-
-  </div>
+</article>
 
 </div>
 
+
+
+<h2 class="section-title">Social Media & Communities</h2>
+
+<div class="resource-grid">
+
+
+<article class="resource">
+
+<span class="tag">Facebook</span>
+
+<h3>Marilyn Monroe Gift Shop</h3>
+
+<p>
+Die Facebook-Präsenz Marilyn Monroe Gift Shop richtet sich
+thematisch an Fans der weltbekannten Hollywood-Ikone Marilyn
+Monroe und verbindet Popkultur, Nostalgie und Geschenkideen
+rund um ihren bis heute unverwechselbaren Stil.
+</p>
+
+<a href="https://www.facebook.com/gift.shop.marilyn.monroe/" target="_blank">
+Marilyn Monroe Gift Shop on Facebook →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">Facebook · Street Art</span>
+
+<h3>Street Art Galleries Barcelona</h3>
+
+<p>
+Street Art Galleries Barcelona verbindet die Themen Barcelona,
+Street Art, Urban Art und soziale Medien. Die Facebook-Präsenz
+bietet einen digitalen Anlaufpunkt für Menschen, die sich für
+die kreative und urbane Kunstszene Barcelonas interessieren.
+</p>
+
+<a href="https://www.facebook.com/street.art.galleries.barcelona" target="_blank">
+Street Art Galleries Barcelona on Facebook →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">Facebook · SEO</span>
+
+<h3>SEO Svizzera</h3>
+
+<p>
+SEO Svizzera konzentriert sich auf Suchmaschinenoptimierung,
+Online Marketing und digitale Sichtbarkeit mit Bezug zum
+italienischsprachigen Schweizer Markt und italienischsprachigen
+Unternehmen.
+</p>
+
+<a href="https://www.facebook.com/seo.svizzera/" target="_blank">
+SEO Svizzera on Facebook →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">Instagram · SEO</span>
+
+<h3>SEO Marketing Schweiz</h3>
+
+<p>
+SEO Marketing Schweiz auf Instagram verbindet Themen wie
+Suchmaschinenoptimierung, digitales Marketing, Online-
+Sichtbarkeit und die Entwicklung von Internetprojekten
+mit einem klaren Bezug zur Schweiz.
+</p>
+
+<a href="https://www.instagram.com/seo.marketing.schweiz/" target="_blank">
+SEO Marketing Schweiz on Instagram →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">YouTube · SEO</span>
+
+<h3>SEO Schweiz YouTube</h3>
+
+<p>
+Der YouTube-Kanal SEO Schweiz ergänzt die Online-Präsenz
+mit dem Medium Video. Suchmaschinenoptimierte Videos können
+Unternehmen dabei unterstützen, sowohl über YouTube als auch
+über die klassische Google-Suche zusätzliche Sichtbarkeit
+zu erzielen.
+</p>
+
+<a href="https://www.youtube.com/@seo.schweiz" target="_blank">
+SEO Schweiz on YouTube →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">Facebook · RatedMaps</span>
+
+<h3>RatedMaps</h3>
+
+<p>
+Die Facebook-Präsenz von RatedMaps ergänzt das digitale
+RatedMaps-Projekt auf Social Media und verbindet lokale
+Entdeckungen, Karten, Bewertungen und interessante Orte
+mit einer zusätzlichen Community-Plattform.
+</p>
+
+<a href="https://www.facebook.com/ratedmaps/" target="_blank">
+RatedMaps on Facebook →
+</a>
+
+</article>
+
+</div>
+
+
+
+<h2 class="section-title">International SEO News</h2>
+
+<div class="resource-grid">
+
+
+<article class="resource">
+
+<span class="tag">Deutsch</span>
+
+<h3>SEO News Deutschland & Schweiz</h3>
+
+<p>
+Aktuelle deutschsprachige Inhalte rund um SEO,
+Suchmaschinen, Google, digitales Marketing und Entwicklungen
+in der internationalen Search-Branche.
+</p>
+
+<a href="https://news.seoschweiz.net/de/">
+SEO News auf Deutsch →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">English</span>
+
+<h3>SEO News in English</h3>
+
+<p>
+English-language SEO news covering search engines,
+Google developments, search marketing and topics related
+to organic visibility and digital marketing.
+</p>
+
+<a href="https://news.seoschweiz.net/en/">
+SEO News in English →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">Français</span>
+
+<h3>Actualités SEO en français</h3>
+
+<p>
+Actualités consacrées au référencement naturel,
+aux moteurs de recherche, à Google et aux tendances
+du marketing digital pour un public francophone.
+</p>
+
+<a href="https://news.seoschweiz.net/fr/">
+Actualités SEO en français →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">Italiano</span>
+
+<h3>Notizie SEO in italiano</h3>
+
+<p>
+Notizie e aggiornamenti dedicati alla SEO,
+ai motori di ricerca, a Google e al marketing digitale
+per lettori e professionisti di lingua italiana.
+</p>
+
+<a href="https://news.seoschweiz.net/it/">
+Notizie SEO in italiano →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">Español</span>
+
+<h3>Noticias SEO en español</h3>
+
+<p>
+Noticias sobre posicionamiento SEO, buscadores,
+Google y marketing digital dirigidas a lectores,
+empresas y profesionales de habla española.
+</p>
+
+<a href="https://news.seoschweiz.net/es/">
+Noticias SEO en español →
+</a>
+
+</article>
+
+
+<article class="resource">
+
+<span class="tag">Português</span>
+
+<h3>Notícias SEO em português</h3>
+
+<p>
+Notícias e informações sobre SEO, mecanismos de busca,
+Google, marketing digital e estratégias de visibilidade
+online para leitores de língua portuguesa.
+</p>
+
+<a href="https://news.seoschweiz.net/pt/">
+Notícias SEO em português →
+</a>
+
+</article>
+
+</div>
+
+
+
+<section class="manager">
+
+<h2>Private SEO Link Manager</h2>
+
+<p>
+Hier kannst du zusätzliche Backlink-Quellen,
+Blogverzeichnisse und interessante SEO-Websites speichern.
+Die Einträge werden nur lokal in deinem Browser gespeichert.
+</p>
+
+<form id="linkForm">
+
+<div class="form-grid">
+
+<div>
+
+<label>Name</label>
+
+<input id="name" required
+placeholder="z.B. TopBlogs">
+
+</div>
+
+
+<div>
+
+<label>URL</label>
+
+<input id="url" type="url" required
+placeholder="https://example.com">
+
+</div>
+
+
+<div>
+
+<label>SEO-Wert</label>
+
+<input id="score"
+type="number"
+min="1"
+max="100"
+value="50">
+
+</div>
+
+
+<div>
+
+<label>Kategorie</label>
+
+<select id="type">
+
+<option>Blogverzeichnis</option>
+<option>Webverzeichnis</option>
+<option>Gastbeitrag</option>
+<option>Backlink</option>
+<option>Social Media</option>
+<option>News</option>
+<option>Eigene Webseite</option>
+<option>Sonstiges</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>Linktyp</label>
+
+<select id="follow">
+
+<option>DoFollow</option>
+<option>NoFollow</option>
+<option>Unbekannt</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>Kosten</label>
+
+<select id="cost">
+
+<option>Kostenlos</option>
+<option>Bezahlt</option>
+<option>Freemium</option>
+<option>Unbekannt</option>
+
+</select>
+
+</div>
+
+
+<div class="full">
+
+<label>Notiz</label>
+
+<textarea id="notes"
+placeholder="Informationen zur Linkquelle..."></textarea>
+
+</div>
+
+</div>
+
+
+<button type="submit">
+Link speichern
+</button>
+
+</form>
+
+
+<div class="saved-links">
+
+<h3>Gespeicherte SEO Links</h3>
+
+<div id="links"></div>
+
+</div>
+
+</section>
+
+</main>
+
+
 <footer>
-  SEO Links Tool ·
-  <a href="https://www.seoschweiz.net/" target="_blank" rel="noopener">
-    SEO Schweiz
-  </a>
+
+SEO Links & Resources ·
+
+<a href="https://www.seoschweiz.net/">
+SEO Schweiz
+</a>
+
 </footer>
+
 
 <script>
 
-  const STORAGE_KEY = "seoSchweizLinks";
+const KEY = "seoSchweizLinks";
 
-  let links = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+let links =
+JSON.parse(localStorage.getItem(KEY)) || [];
 
-  let editId = null;
 
-  const form = document.getElementById("linkForm");
-  const table = document.getElementById("linkTable");
-  const emptyState = document.getElementById("emptyState");
+function escapeHTML(str) {
 
-  const searchInput = document.getElementById("search");
-  const filterType = document.getElementById("filterType");
-  const filterCost = document.getElementById("filterCost");
-  const sortSelect = document.getElementById("sort");
+return String(str || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
-  const saveButton = document.getElementById("saveButton");
-  const cancelEdit = document.getElementById("cancelEdit");
+}
 
 
-  function saveLinks() {
+function render() {
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(links)
-    );
+const container =
+document.getElementById("links");
 
-  }
+container.innerHTML = "";
 
 
-  function escapeHtml(text) {
+if (!links.length) {
 
-    if (!text) return "";
+container.innerHTML =
+"<p>Noch keine privaten Links gespeichert.</p>";
 
-    return text
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+return;
 
-  }
+}
 
 
-  function getScoreClass(score) {
+links
+.sort((a,b) => b.score-a.score)
+.forEach((link,index) => {
 
-    if (score >= 75) return "score-high";
-    if (score >= 45) return "score-medium";
+const item =
+document.createElement("div");
 
-    return "score-low";
+item.className =
+"saved-item";
 
-  }
 
+item.innerHTML = `
 
-  function updateStats() {
+<strong>
+${escapeHTML(link.name)}
+</strong>
 
-    document.getElementById("totalLinks").textContent =
-      links.length;
+· SEO ${link.score}
 
-    document.getElementById("dofollowCount").textContent =
-      links.filter(link => link.follow === "DoFollow").length;
+· ${escapeHTML(link.type)}
 
-    document.getElementById("freeCount").textContent =
-      links.filter(link => link.cost === "Kostenlos").length;
+· ${escapeHTML(link.follow)}
 
-    document.getElementById("submittedCount").textContent =
-      links.filter(link => link.status === "Eingetragen").length;
+· ${escapeHTML(link.cost)}
 
-  }
+<br>
 
+<a
+href="${escapeHTML(link.url)}"
+target="_blank"
+rel="noopener">
+Website öffnen
+</a>
 
-  function renderLinks() {
+${link.notes
+? "<p>"+escapeHTML(link.notes)+"</p>"
+: ""}
 
-    let filtered = [...links];
+<button
+class="delete"
+data-index="${index}">
+Löschen
+</button>
 
-    const search = searchInput.value.toLowerCase().trim();
+`;
 
-    if (search) {
+container.appendChild(item);
 
-      filtered = filtered.filter(link =>
+});
 
-        link.name.toLowerCase().includes(search) ||
-        link.url.toLowerCase().includes(search) ||
-        link.type.toLowerCase().includes(search) ||
-        link.country.toLowerCase().includes(search) ||
-        link.notes.toLowerCase().includes(search)
 
-      );
+document
+.querySelectorAll(".delete")
+.forEach(button => {
 
-    }
+button.addEventListener(
+"click",
+function() {
 
+links.splice(
+Number(this.dataset.index),
+1
+);
 
-    if (filterType.value) {
+save();
 
-      filtered = filtered.filter(
-        link => link.type === filterType.value
-      );
+}
 
-    }
+);
 
+});
 
-    if (filterCost.value) {
+}
 
-      filtered = filtered.filter(
-        link => link.cost === filterCost.value
-      );
 
-    }
+function save() {
 
+localStorage.setItem(
+KEY,
+JSON.stringify(links)
+);
 
-    switch (sortSelect.value) {
+render();
 
-      case "scoreDesc":
+}
 
-        filtered.sort(
-          (a, b) => b.score - a.score
-        );
 
-        break;
+document
+.getElementById("linkForm")
+.addEventListener(
+"submit",
+function(e) {
 
+e.preventDefault();
 
-      case "scoreAsc":
 
-        filtered.sort(
-          (a, b) => a.score - b.score
-        );
+links.push({
 
-        break;
+name:
+document.getElementById("name").value.trim(),
 
+url:
+document.getElementById("url").value.trim(),
 
-      case "nameAsc":
+score:
+Number(document.getElementById("score").value),
 
-        filtered.sort(
-          (a, b) => a.name.localeCompare(b.name)
-        );
+type:
+document.getElementById("type").value,
 
-        break;
+follow:
+document.getElementById("follow").value,
 
+cost:
+document.getElementById("cost").value,
 
-      case "newest":
+notes:
+document.getElementById("notes").value.trim()
 
-        filtered.sort(
-          (a, b) => b.created - a.created
-        );
+});
 
-        break;
 
-    }
+save();
 
+this.reset();
 
-    table.innerHTML = "";
+document.getElementById("score").value = 50;
 
+}
 
-    if (filtered.length === 0) {
+);
 
-      emptyState.style.display = "block";
 
-    } else {
-
-      emptyState.style.display = "none";
-
-    }
-
-
-    filtered.forEach(link => {
-
-      const tr = document.createElement("tr");
-
-
-      let followBadge = "badge";
-
-      if (link.follow === "DoFollow") {
-        followBadge += " badge-green";
-      }
-
-      if (link.follow === "NoFollow") {
-        followBadge += " badge-red";
-      }
-
-
-      let costBadge = "badge";
-
-      if (link.cost === "Kostenlos") {
-        costBadge += " badge-green";
-      }
-
-      if (link.cost === "Bezahlt") {
-        costBadge += " badge-red";
-      }
-
-
-      tr.innerHTML = `
-
-        <td>
-          <span class="seo-score ${getScoreClass(link.score)}">
-            ${link.score}
-          </span>
-        </td>
-
-        <td>
-
-          <strong>
-            ${escapeHtml(link.name)}
-          </strong>
-
-          ${
-            link.notes
-              ? `<br><small>${escapeHtml(link.notes)}</small>`
-              : ""
-          }
-
-        </td>
-
-        <td>
-          ${escapeHtml(link.type)}
-        </td>
-
-        <td>
-          <span class="${followBadge}">
-            ${escapeHtml(link.follow)}
-          </span>
-        </td>
-
-        <td>
-          <span class="${costBadge}">
-            ${escapeHtml(link.cost)}
-          </span>
-        </td>
-
-        <td>
-          ${escapeHtml(link.country || "-")}
-        </td>
-
-        <td>
-          <span class="badge badge-blue">
-            ${escapeHtml(link.status)}
-          </span>
-        </td>
-
-        <td>
-
-          <div class="actions">
-
-            <a
-              href="${escapeHtml(link.url)}"
-              target="_blank"
-              rel="noopener"
-              class="open-link"
-            >
-              Öffnen
-            </a>
-
-            <button
-              class="edit-link"
-              onclick="editLink('${link.id}')"
-            >
-              Bearbeiten
-            </button>
-
-            <button
-              class="delete-link"
-              onclick="deleteLink('${link.id}')"
-            >
-              Löschen
-            </button>
-
-          </div>
-
-        </td>
-
-      `;
-
-
-      table.appendChild(tr);
-
-    });
-
-
-    updateStats();
-
-  }
-
-
-  form.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-
-    const linkData = {
-
-      id:
-        editId ||
-        Date.now().toString(),
-
-      name:
-        document.getElementById("name").value.trim(),
-
-      url:
-        document.getElementById("url").value.trim(),
-
-      score:
-        Number(document.getElementById("score").value),
-
-      type:
-        document.getElementById("type").value,
-
-      follow:
-        document.getElementById("follow").value,
-
-      cost:
-        document.getElementById("cost").value,
-
-      country:
-        document.getElementById("country").value.trim(),
-
-      status:
-        document.getElementById("status").value,
-
-      notes:
-        document.getElementById("notes").value.trim(),
-
-      created:
-        editId
-          ? links.find(link => link.id === editId).created
-          : Date.now()
-
-    };
-
-
-    if (editId) {
-
-      const index =
-        links.findIndex(link => link.id === editId);
-
-      links[index] = linkData;
-
-    } else {
-
-      links.push(linkData);
-
-    }
-
-
-    saveLinks();
-
-    resetForm();
-
-    renderLinks();
-
-  });
-
-
-  function editLink(id) {
-
-    const link =
-      links.find(link => link.id === id);
-
-
-    if (!link) return;
-
-
-    editId = id;
-
-
-    document.getElementById("name").value =
-      link.name;
-
-    document.getElementById("url").value =
-      link.url;
-
-    document.getElementById("score").value =
-      link.score;
-
-    document.getElementById("type").value =
-      link.type;
-
-    document.getElementById("follow").value =
-      link.follow;
-
-    document.getElementById("cost").value =
-      link.cost;
-
-    document.getElementById("country").value =
-      link.country;
-
-    document.getElementById("status").value =
-      link.status;
-
-    document.getElementById("notes").value =
-      link.notes;
-
-
-    saveButton.textContent =
-      "Änderungen speichern";
-
-    cancelEdit.style.display =
-      "inline-block";
-
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  }
-
-
-  function deleteLink(id) {
-
-    const link =
-      links.find(link => link.id === id);
-
-
-    if (!link) return;
-
-
-    const confirmed =
-      confirm(
-        `Link "${link.name}" wirklich löschen?`
-      );
-
-
-    if (!confirmed) return;
-
-
-    links =
-      links.filter(link => link.id !== id);
-
-
-    saveLinks();
-
-    renderLinks();
-
-  }
-
-
-  function resetForm() {
-
-    editId = null;
-
-    form.reset();
-
-    document.getElementById("score").value =
-      50;
-
-    saveButton.textContent =
-      "Link speichern";
-
-    cancelEdit.style.display =
-      "none";
-
-  }
-
-
-  cancelEdit.addEventListener(
-    "click",
-    resetForm
-  );
-
-
-  searchInput.addEventListener(
-    "input",
-    renderLinks
-  );
-
-
-  filterType.addEventListener(
-    "change",
-    renderLinks
-  );
-
-
-  filterCost.addEventListener(
-    "change",
-    renderLinks
-  );
-
-
-  sortSelect.addEventListener(
-    "change",
-    renderLinks
-  );
-
-
-  renderLinks();
+render();
 
 </script>
 
